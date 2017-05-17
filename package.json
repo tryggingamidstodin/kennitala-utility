@@ -1,7 +1,7 @@
 {
     "name": "kennitala-utility",
     "version": "1.0.0",
-    "description": "Utility functions for icelandic social security numbers (kennitölur).",
+    "description": "Utility functions for icelandic social security numbers (kennitolur).",
     "main": "js/index.js",
     "scripts": {
         "test": "mocha js/test/index.js",
@@ -10,7 +10,7 @@
     },
     "keywords": [
         "kennitala",
-        "kennitölur"
+        "kennitolur"
     ],
     "author": "Tryggingamidstodin <bt.hugbunadargerd@tm.is> (https://github.com/tryggingamidstodin/)",
     "files": [
