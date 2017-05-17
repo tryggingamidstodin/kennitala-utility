@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "types": [
+            "mocha"
+        ],
+        "declaration": true,
+        "module": "commonjs",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "strictNullChecks": true,
+        "target": "ES6",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outDir": "js",
+        "sourceMap": true
+    },
+    "exclude": [
+        "node_modules",
+        "js"
+    ],
+    "compileOnSave": true
+}
