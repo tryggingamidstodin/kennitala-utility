@@ -1,19 +1,26 @@
-###### checks wheter kennitala is legal based on modulus method: [national registry citation](http://www.skra.is/pages/1049)
+Written in TypeScript. Compiled javascript is in js/ subfolder
+
+###### checks whether kennitala is legal based on modulus method
 ```javascript
-isLegalKennitala(kt)
+isLegalKt(kt : string | number) // return boolean
 ```
 
-###### cleans, checks legality, ensures length of 10, returns as string
+###### cleans, checks legality and returnsstring with a length of 10
 ```javascript
-getWellFormedKennitala(kt)
+getWellFormedKt (kt : string | number | null) // return boolean | string
 ```
 
 ###### returns date of birth based on kennitala
 ```javascript
-getBirthdate(kt)
+getBirthdate (kt : string | number) // return boolean | Date
 ```
 
-###### returns age based on kennitala
+###### returns current age based on kennitala
 ```javascript
-getAge(kt)
+getAge (kt : string | number , referenceDate? : Date) // return boolean | number
+```
+
+###### 
+```javascript
+function isKennitalaPart(str? : string)  // return boolean
 ```
