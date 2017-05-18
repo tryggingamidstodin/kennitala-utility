@@ -1,4 +1,5 @@
-Written in TypeScript. Compiled javascript is in js/ subfolder
+Utility functions for icelandic social security numbers (kennitolur).
+Written in TypeScript. Compiled javascript is in js/ subfolder.
 
 ###### checks whether kennitala is legal based on modulus method
 ```javascript
