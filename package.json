@@ -1,32 +1,32 @@
 {
-    "name": "kennitala-utility",
-    "version": "1.0.2",
-    "description": "Utility functions for icelandic social security numbers (kennitolur).",
-    "main": "js/src/index.js",
-    "types": "js/src/index.d.ts",
-    "scripts": {
-        "test": "mocha js/test/index.js",
-        "dev": "tsc -w & mocha -w js/test/index.js && fg",
-        "clean": "rm -rf js",
-        "prepublish": "npm run clean && tsc"
-    },
-    "keywords": [
-        "kennitala",
-        "kennitolur"
-    ],
-    "author": "Tryggingamidstodin <bt.hugbunadargerd@tm.is> (https://github.com/tryggingamidstodin/)",
-    "files": [
-        "js"
-    ],
-    "license": "MIT",
-    "devDependencies": {
-        "@types/mocha": "^2.2.41",
-        "chai": "^3.5.0",
-        "mocha": "^3.4.1",
-        "typescript": "^2.3.2"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/tryggingamidstodin/kennitala-utility"
-    }
+  "name": "kennitala-utility",
+  "version": "2.0.0",
+  "description": "Utility functions for icelandic social security numbers (kennitolur).",
+  "main": "js/src/index.js",
+  "types": "js/src/index.d.ts",
+  "scripts": {
+    "test": "mocha js/test/index.js",
+    "dev": "tsc -w & mocha -w js/test/index.js && fg",
+    "clean": "rm -rf js",
+    "prepublish": "npm run clean && tsc"
+  },
+  "keywords": [
+    "kennitala",
+    "kennitolur"
+  ],
+  "author": "Tryggingamidstodin <bt.hugbunadargerd@tm.is> (https://github.com/tryggingamidstodin/)",
+  "files": [
+    "js"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/mocha": "^2.2.41",
+    "chai": "^3.5.0",
+    "mocha": "^3.4.1",
+    "typescript": "^2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tryggingamidstodin/kennitala-utility"
+  }
 }
