@@ -20,7 +20,7 @@ const isMod11 = function (kt : string) : boolean {
     }
     return true
 }
-const formatKt = function(kt : string | number | null) : string {
+const format = function(kt : string | number | null) : string {
     kt = kt || ''
     if (typeof kt === 'number') {
         kt = kt.toString()
@@ -33,29 +33,23 @@ const formatKt = function(kt : string | number | null) : string {
     }
     return kt
 }
-const validateKt = function(kt : string) : boolean {
+export function isValid(kt : string | number) : boolean {
+    kt = format(kt)
     if (typeof kt !== 'string' || kt.length < 9 || !kt.match(/^[\d\.]/) || kt === "0000000000") {
-        return false
-    }
-    return true
-}
-export function isLegalKt(kt : string | number) : boolean {
-    kt = formatKt(kt)
-    if (!validateKt(kt)) {
         return false
     }
     return isMod11(kt)
 }
-export function formatAndValidateKt (kt : string | number | null) : string {
-    kt = formatKt(kt)
-    if (!validateKt(kt) || !isMod11(kt)) {
-        throw new Error('Illegal or invalid kennitala')
+export function formatAndValidate (kt : string | number | null) : string {
+    kt = format(kt)
+    if (!isValid(kt)) {
+        throw new Error('Invalid kennitala')
     }
     return kt
 }
 
 export function getBirthdate (kt : string | number) : Date {
-    const stringKt = formatKt(kt);
+    const stringKt = format(kt);
     let day = Number(stringKt.substring(0,2))
     //if it is company
     if(day>31)

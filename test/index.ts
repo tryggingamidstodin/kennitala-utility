@@ -1,17 +1,16 @@
-'use strict'
-import * as kennitala from '../'
+import * as kennitala from '../src/'
 import {expect} from 'chai'
 
 describe('kennitala', function() {
     it('isLegalKt should check if a social security number is valid', function() {
-        expect(kennitala.isLegalKt("1504842359")).to.equal(true)
+        expect(kennitala.isValid("1504842359")).to.equal(true)
     })
-    it('getWellFormedKt', function() {
-        expect(kennitala.getWellFormedKt("301794989")).to.equal("0301794989")
-        expect(kennitala.getWellFormedKt("adfasdf")).to.equal(false)
-        expect(kennitala.getWellFormedKt(null)).to.equal(false)
-        expect(kennitala.getWellFormedKt("150484-2359")).to.equal("1504842359")
-        expect(kennitala.getWellFormedKt("30179-4989")).to.equal("0301794989")
+    it('formatAndValidate', function() {
+        expect(kennitala.formatAndValidate("301794989")).to.equal("0301794989")
+        expect(()=>kennitala.formatAndValidate("adfasdf")).to.throw('Invalid kennitala');
+        expect(()=>kennitala.formatAndValidate(null)).to.throw('Invalid kennitala');
+        expect(kennitala.formatAndValidate("150484-2359")).to.equal("1504842359")
+        expect(kennitala.formatAndValidate("30179-4989")).to.equal("0301794989")
     })
     describe('is kenntala part', function() {
         it('should return false for empty string or undefined', function() {
