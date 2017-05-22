@@ -26,7 +26,7 @@ export function format(kt? : string | number) : string {
         kt = kt.toString()
     }
     if (kt) {
-        kt = kt.replace("-", "")
+        kt = kt.replace(/(\D)+/g, '')
     }
     if (kt.length === 9) {
         kt = "0" + kt //Stutt kennitala (eða ólögleg), bætum einu núlli fyrir framan.
