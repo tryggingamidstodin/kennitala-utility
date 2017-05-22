@@ -8,7 +8,7 @@ describe('kennitala', function() {
     it('formatAndValidate', function() {
         expect(kennitala.formatAndValidate("301794989")).to.equal("0301794989")
         expect(()=>kennitala.formatAndValidate("adfasdf")).to.throw('Invalid kennitala');
-        expect(()=>kennitala.formatAndValidate(null)).to.throw('Invalid kennitala');
+        expect(()=>kennitala.formatAndValidate()).to.throw('Invalid kennitala');
         expect(kennitala.formatAndValidate("150484-2359")).to.equal("1504842359")
         expect(kennitala.formatAndValidate("30179-4989")).to.equal("0301794989")
     })

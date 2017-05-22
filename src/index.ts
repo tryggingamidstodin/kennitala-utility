@@ -20,7 +20,7 @@ const isMod11 = function (kt : string) : boolean {
     }
     return true
 }
-export function format(kt : string | number | null) : string {
+export function format(kt? : string | number) : string {
     kt = kt || ''
     if (typeof kt === 'number') {
         kt = kt.toString()
@@ -40,7 +40,7 @@ export function isValid(kt : string | number) : boolean {
     }
     return isMod11(kt)
 }
-export function formatAndValidate (kt : string | number | null) : string {
+export function formatAndValidate (kt? : string | number) : string {
     kt = format(kt)
     if (!isValid(kt)) {
         throw new Error('Invalid kennitala')
