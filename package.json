@@ -3,10 +3,11 @@
     "version": "1.0.2",
     "description": "Utility functions for icelandic social security numbers (kennitolur).",
     "main": "js/index.js",
+    "types": "js/index.d.ts",
     "scripts": {
         "test": "mocha js/test/index.js",
         "dev": "tsc -w & mocha -w js/test/index.js && fg",
-        "compile": "tsc"
+        "prepublish": "tsc"
     },
     "keywords": [
         "kennitala",
@@ -14,8 +15,7 @@
     ],
     "author": "Tryggingamidstodin <bt.hugbunadargerd@tm.is> (https://github.com/tryggingamidstodin/)",
     "files": [
-        "js",
-        "index.ts"
+        "js"
     ],
     "license": "MIT",
     "devDependencies": {
