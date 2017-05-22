@@ -1,5 +1,5 @@
 'use strict'
-const isMod11 = function (kt : string) {
+const isMod11 = function (kt : string) : boolean {
     //Modulus-aðferð við að sannreyna kennitölu
     //http://www.skra.is/pages/1049
     var mod11 = 11 - ((
@@ -20,7 +20,7 @@ const isMod11 = function (kt : string) {
     }
     return true
 }
-const ktAsString = function(kt : string | number | null) {
+const formatKt = function(kt : string | number | null) : string {
     kt = kt || ''
     if (typeof kt === 'number') {
         kt = kt.toString()
@@ -33,32 +33,29 @@ const ktAsString = function(kt : string | number | null) {
     }
     return kt
 }
-const validateKtString = function(kt : string) {
+const validateKt = function(kt : string) : boolean {
     if (typeof kt !== 'string' || kt.length < 9 || !kt.match(/^[\d\.]/) || kt === "0000000000") {
         return false
     }
     return true
 }
-export function isLegalKt(kt : string | number) {
-    kt = ktAsString(kt)
-    if (!validateKtString(kt)) {
+export function isLegalKt(kt : string | number) : boolean {
+    kt = formatKt(kt)
+    if (!validateKt(kt)) {
         return false
     }
     return isMod11(kt)
 }
-export function getWellFormedKt (kt : string | number | null) {
-    kt = ktAsString(kt)
-    if (!validateKtString(kt)) {
-        return false
+export function formatAndValidateKt (kt : string | number | null) : string {
+    kt = formatKt(kt)
+    if (!validateKt(kt) || !isMod11(kt)) {
+        throw new Error('Illegal or invalid kennitala')
     }
     return kt
 }
 
-export function getBirthdate (kt : string | number){
-    const stringKt = getWellFormedKt(kt)
-    if(!stringKt){
-      return false
-    }
+export function getBirthdate (kt : string | number) : Date {
+    const stringKt = formatKt(kt);
     let day = Number(stringKt.substring(0,2))
     //if it is company
     if(day>31)
@@ -68,14 +65,14 @@ export function getBirthdate (kt : string | number){
     const month = Number(stringKt.substring(2,4))
     //Adding the century year
     const year = (Number(stringKt.substring(9,10)) === 0?2000:1900) + Number(stringKt.substring(4,6))
+    if(day>31 || month>12){
+      throw new Error('Invalid date of birth')
+    }
     return new Date(year,Number(month)-1,day)
 }
-export function getAge (kt : string | number , referenceDate? : Date) {
+export function getAge (kt : string | number , referenceDate? : Date) : number {
     referenceDate  = referenceDate  || new Date()
     var ktDate = getBirthdate(kt)
-    if(!ktDate){
-      return false
-    }
     var refYear = referenceDate. getFullYear()
     var calcDate = new Date(ktDate)
     calcDate.setFullYear(refYear)
@@ -85,7 +82,7 @@ export function getAge (kt : string | number , referenceDate? : Date) {
     }
     return age < 1 ? (referenceDate.getTime()- ktDate.getTime())/1000/60/60/24/365.2422 : age
 }
-export function isKennitalaPart(str? : string) {
+export function isKennitalaPart(str? : string) : boolean {
    if (!str) {
         return false
     }
