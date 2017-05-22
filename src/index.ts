@@ -20,7 +20,7 @@ const isMod11 = function (kt : string) : boolean {
     }
     return true
 }
-const format = function(kt : string | number | null) : string {
+export function format(kt : string | number | null) : string {
     kt = kt || ''
     if (typeof kt === 'number') {
         kt = kt.toString()
