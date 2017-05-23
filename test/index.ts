@@ -6,11 +6,15 @@ describe('kennitala', function() {
         expect(kennitala.isValid("1504842359")).to.equal(true)
     })
     it('formatAndValidate', function() {
-        expect(kennitala.formatAndValidate("301794989")).to.equal("0301794989")
-        expect(()=>kennitala.formatAndValidate("adfasdf")).to.throw('Invalid kennitala');
-        expect(()=>kennitala.formatAndValidate()).to.throw('Invalid kennitala');
-        expect(kennitala.formatAndValidate("150484-2359")).to.equal("1504842359")
-        expect(kennitala.formatAndValidate("30179-4989")).to.equal("0301794989")
+        expect(kennitala.cleanAndValidate("301794989")).to.equal("0301794989")
+        expect(()=>kennitala.cleanAndValidate("adfasdf")).to.throw('Invalid kennitala');
+        expect(()=>kennitala.cleanAndValidate()).to.throw('Invalid kennitala');
+        expect(kennitala.cleanAndValidate("150484-2359")).to.equal("1504842359")
+        expect(kennitala.cleanAndValidate("30179-4989")).to.equal("0301794989")
+    })
+    it('should add dash to kennitala', function() {
+        expect(kennitala.format("1504842359")).to.equal("150484-2359");
+        expect(kennitala.format('101842359')).to.equal("010184-2359");
     })
     describe('is kenntala part', function() {
         it('should return false for empty string or undefined', function() {

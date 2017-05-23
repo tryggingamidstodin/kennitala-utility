@@ -20,7 +20,11 @@ const isMod11 = function (kt : string) : boolean {
     }
     return true
 }
-export function format(kt? : string | number) : string {
+export function format(kt: string) : string {
+    kt = clean(kt);
+    return kt.substr(0,6) + '-' + kt.substr(6,10);
+}
+export function clean(kt? : string | number) : string {
     kt = kt || ''
     if (typeof kt === 'number') {
         kt = kt.toString()
@@ -34,14 +38,14 @@ export function format(kt? : string | number) : string {
     return kt
 }
 export function isValid(kt : string | number) : boolean {
-    kt = format(kt)
+    kt = clean(kt)
     if (typeof kt !== 'string' || kt.length < 9 || !kt.match(/^[\d\.]/) || kt === "0000000000") {
         return false
     }
     return isMod11(kt)
 }
-export function formatAndValidate (kt? : string | number) : string {
-    kt = format(kt)
+export function cleanAndValidate (kt? : string | number) : string {
+    kt = clean(kt)
     if (!isValid(kt)) {
         throw new Error('Invalid kennitala')
     }
@@ -49,7 +53,7 @@ export function formatAndValidate (kt? : string | number) : string {
 }
 
 export function getBirthdate (kt : string | number) : Date {
-    const stringKt = format(kt);
+    const stringKt = clean(kt);
     let day = Number(stringKt.substring(0,2))
     //if it is company
     if(day>31)
