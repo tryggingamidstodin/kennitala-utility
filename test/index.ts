@@ -60,4 +60,13 @@ describe('kennitala', function() {
             expect(kennitala.getAge('3112832359', refDate)).to.equal(188 / 365.2422)
         })
     })
+    it('should make new valid kennitala', ()=>{
+        const kt = kennitala.makeKennitala(new Date(1984,4,15))
+        expect(kennitala.isValid(kt)).to.eq(true)
+        expect(kt).to.eq('1504842009')
+
+        const kt2 = kennitala.makeKennitala(new Date(1983,5,6))
+        expect(kennitala.isValid(kt2)).to.eq(true)
+        expect(kt2).to.eq('0605832189')
+    })
 })

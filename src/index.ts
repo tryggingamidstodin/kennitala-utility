@@ -1,7 +1,7 @@
 'use strict'
 const isMod11 = function (kt : string) : boolean {
     //Modulus-aðferð við að sannreyna kennitölu
-    //http://www.skra.is/pages/1049
+    //https://www.skra.is/einstaklingar/eg-og-fjolskyldan/eg-i-thjodskra/um-kennitolur/
     var mod11 = 11 - ((
             3 * Number(kt.charAt(0)) +
             2 * Number(kt.charAt(1)) +
@@ -23,6 +23,32 @@ const isMod11 = function (kt : string) : boolean {
 export function format(kt: string) : string {
     kt = clean(kt);
     return kt.substr(0,6) + '-' + kt.substr(6,10);
+}
+export function makeKennitala(birthdate: Date) : string {
+    let digits = [
+        Math.floor(birthdate.getDate()/10),
+        birthdate.getDate()%10,
+        Math.floor(birthdate.getMonth()/10),
+        birthdate.getMonth()%10,
+        Math.floor((birthdate.getFullYear()%100)/10),
+        birthdate.getFullYear()%10,
+        2,
+        0
+    ]
+    let vartalafunc = (digits)=>{
+        return 11-(digits[0]*3+digits[1]*2+digits[2]*7+digits[3]*6+digits[4]*5+digits[5]*4+digits[6]*3+digits[7]*2)%11
+    }
+    let vartala = vartalafunc(digits)
+    if(vartala===11){
+        digits.push(0)
+    } else if(vartala===10) {
+        digits[7] = digits[7] + 1
+        digits.push(vartalafunc(digits))
+    } else {
+        digits.push(vartala)
+    }
+    digits.push(Math.floor((birthdate.getFullYear()/100)%10))
+    return digits.join('')
 }
 export function clean(kt? : string | number) : string {
     kt = kt || ''
