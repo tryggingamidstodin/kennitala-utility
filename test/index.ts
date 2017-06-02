@@ -69,4 +69,10 @@ describe('kennitala', function() {
         expect(kennitala.isValid(kt2)).to.eq(true)
         expect(kt2).to.eq('0605832189')
     })
+    it('should verify if kennitala has a valid birthdate', ()=>{
+        expect(kennitala.isValidDate('3106162189')).to.eq(false);
+        expect(kennitala.isValidDate('1504842359')).to.eq(true);
+        expect(kennitala.isValidDate('2902121239')).to.eq(true);
+        expect(kennitala.isValidDate('2902131239')).to.eq(false);
+    })
 })

@@ -78,6 +78,23 @@ export function cleanAndValidate (kt? : string | number) : string {
     return kt
 }
 
+export function isValidDate (kt: string | number) : boolean {
+    const stringKt = clean(kt);
+    let day = Number(stringKt.substring(0,2))
+    //if it is company
+    if(day>31){
+        day = day - 40
+    }
+    const month = Number(stringKt.substring(2,4))
+    //Adding the century year
+    const year = (Number(stringKt.substring(9,10)) === 0?2000:1900) + Number(stringKt.substring(4,6))
+    const date = new Date(year,month - 1,day)
+    if(Object.prototype.toString.call(date) == '[object Date]' && date.getMonth()===(month-1)){
+        return true
+    }
+    return false
+}
+
 export function getBirthdate (kt : string | number) : Date {
     const stringKt = clean(kt);
     let day = Number(stringKt.substring(0,2))
@@ -89,7 +106,7 @@ export function getBirthdate (kt : string | number) : Date {
     const month = Number(stringKt.substring(2,4))
     //Adding the century year
     const year = (Number(stringKt.substring(9,10)) === 0?2000:1900) + Number(stringKt.substring(4,6))
-    if(day>31 || month>12){
+    if(!isValidDate(stringKt)){
       throw new Error('Invalid date of birth')
     }
     return new Date(year,Number(month)-1,day)
