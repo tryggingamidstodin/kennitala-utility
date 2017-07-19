@@ -77,7 +77,13 @@ export function cleanAndValidate (kt? : string | number) : string {
     }
     return kt
 }
-
+export function getCleanIfValid (kt? : string | number) : string {
+    kt = clean(kt)
+    if (!isValid(kt)) {
+        return "";
+    }
+    return kt
+}
 export function isValidDate (kt: string | number) : boolean {
     const stringKt = clean(kt);
     let day = Number(stringKt.substring(0,2))
