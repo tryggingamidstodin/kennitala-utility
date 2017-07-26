@@ -8,7 +8,8 @@
     "test": "mocha js/test/index.js",
     "dev": "tsc -w & mocha -w js/test/index.js && fg",
     "clean": "rm -rf js",
-    "prepublish": "npm run clean && tsc"
+    "prepublish": "npm run clean && tsc",
+    "format": "tsfmt -r"
   },
   "keywords": [
     "kennitala",
@@ -23,7 +24,8 @@
     "@types/mocha": "^2.2.41",
     "chai": "^3.5.0",
     "mocha": "^3.4.1",
-    "typescript": "^2.3.2"
+    "typescript": "^2.3.2",
+    "typescript-formatter": "^5.2.0"
   },
   "repository": {
     "type": "git",

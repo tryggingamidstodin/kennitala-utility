@@ -1,5 +1,5 @@
 import * as kennitala from '../src/'
-import {expect} from 'chai'
+import { expect } from 'chai'
 
 describe('kennitala', function() {
     it('isLegalKt should check if a social security number is valid', function() {
@@ -7,12 +7,12 @@ describe('kennitala', function() {
     })
     it('formatAndValidate', function() {
         expect(kennitala.cleanAndValidate("301794989")).to.equal("0301794989")
-        expect(()=>kennitala.cleanAndValidate("adfasdf")).to.throw('Invalid kennitala')
-        expect(()=>kennitala.cleanAndValidate()).to.throw('Invalid kennitala');
+        expect(() => kennitala.cleanAndValidate("adfasdf")).to.throw('Invalid kennitala')
+        expect(() => kennitala.cleanAndValidate()).to.throw('Invalid kennitala');
         expect(kennitala.cleanAndValidate("150484-2359")).to.equal("1504842359")
         expect(kennitala.cleanAndValidate("30179-4989")).to.equal("0301794989")
     })
-    it('should clean kennitala', function(){
+    it('should clean kennitala', function() {
         expect(kennitala.clean("adklæj1015- 9$df123drop table('importantone')4")).to.equal('0101591234')
         expect(kennitala.clean(1234567890)).to.equal('1234567890')
     })
@@ -41,8 +41,8 @@ describe('kennitala', function() {
     describe('what age is the owner of kennitala', function() {
         it('should return the age for kennitala', function() {
             var refDate = new Date(2015, 2, 1)
-            expect(kennitala.getAge('2903992389',new Date(2017,2,28,7,22,1))).to.eq(17)
-            expect(kennitala.getAge('2903992389',new Date(2017,2,29,7,22,1))).to.eq(18)
+            expect(kennitala.getAge('2903992389', new Date(2017, 2, 28, 7, 22, 1))).to.eq(17)
+            expect(kennitala.getAge('2903992389', new Date(2017, 2, 29, 7, 22, 1))).to.eq(18)
             expect(kennitala.getAge('1504842359', new Date(2015, 3, 14))).to.equal(30)
             expect(kennitala.getAge('1504842359', new Date(2015, 3, 15))).to.equal(31)
             expect(kennitala.getAge('0408823919', refDate)).to.equal(32)
@@ -60,16 +60,16 @@ describe('kennitala', function() {
             expect(kennitala.getAge('3112832359', refDate)).to.equal(188 / 365.2422)
         })
     })
-    it('should make new valid kennitala', ()=>{
-        const kt = kennitala.makeKennitala(new Date(1984,4,15))
+    it('should make new valid kennitala', () => {
+        const kt = kennitala.makeKennitala(new Date(1984, 4, 15))
         expect(kennitala.isValid(kt)).to.eq(true)
         expect(kt).to.eq('1504842009')
 
-        const kt2 = kennitala.makeKennitala(new Date(1983,5,6))
+        const kt2 = kennitala.makeKennitala(new Date(1983, 5, 6))
         expect(kennitala.isValid(kt2)).to.eq(true)
         expect(kt2).to.eq('0605832189')
     })
-    it('should verify if kennitala has a valid birthdate', ()=>{
+    it('should verify if kennitala has a valid birthdate', () => {
         expect(kennitala.isValidDate('3106162189')).to.eq(false);
         expect(kennitala.isValidDate('1504842359')).to.eq(true);
         expect(kennitala.isValidDate('2902121239')).to.eq(true);
