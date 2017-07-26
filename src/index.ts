@@ -1,5 +1,5 @@
 'use strict'
-const isMod11 = function(kt: string): boolean {
+const isMod11 = function (kt: string): boolean {
     //Modulus-aðferð við að sannreyna kennitölu
     //https://www.skra.is/einstaklingar/eg-og-fjolskyldan/eg-i-thjodskra/um-kennitolur/
     var mod11 = 11 - ((
@@ -77,19 +77,14 @@ export function cleanAndValidate(kt?: string | number): string {
     }
     return kt
 }
-<<<<<<< Updated upstream
-export function getCleanIfValid (kt? : string | number) : string {
+export function getCleanIfValid(kt?: string | number): string {
     kt = clean(kt)
     if (!isValid(kt)) {
         return "";
     }
     return kt
 }
-export function isValidDate (kt: string | number) : boolean {
-=======
-
 export function isValidDate(kt: string | number): boolean {
->>>>>>> Stashed changes
     const stringKt = clean(kt);
     let day = Number(stringKt.substring(0, 2))
     //if it is company
