@@ -1,5 +1,5 @@
 'use strict'
-const isMod11 = function (kt: string): boolean {
+const isMod11 = function(kt: string): boolean {
     //Modulus-aðferð við að sannreyna kennitölu
     //https://www.skra.is/einstaklingar/eg-og-fjolskyldan/eg-i-thjodskra/um-kennitolur/
     var mod11 = 11 - ((
@@ -125,6 +125,9 @@ export function getAge(kt: string | number, referenceDate?: Date): number {
     var age = refYear - ktDate.getFullYear()
     if (calcDate > referenceDate) {
         age--
+    } if (age < 0) {
+        // þjóðskrá some times registers kennitölur with temporary last digits... add 100 to correct negative age outcome
+        return age + 100
     }
     return age < 1 ? (referenceDate.getTime() - ktDate.getTime()) / 1000 / 60 / 60 / 24 / 365.2422 : age
 }

@@ -11,6 +11,7 @@ describe('kennitala', function() {
         expect(() => kennitala.cleanAndValidate()).to.throw('Invalid kennitala');
         expect(kennitala.cleanAndValidate("150484-2359")).to.equal("1504842359")
         expect(kennitala.cleanAndValidate("30179-4989")).to.equal("0301794989")
+        expect(() => kennitala.cleanAndValidate('2203710000')).to.throw('Invalid kennitala')
     })
     it('should clean kennitala', function() {
         expect(kennitala.clean("adklæj1015- 9$df123drop table('importantone')4")).to.equal('0101591234')
@@ -48,6 +49,7 @@ describe('kennitala', function() {
             expect(kennitala.getAge('0408823919', refDate)).to.equal(32)
             expect(kennitala.getAge('0709042840', refDate)).to.equal(10)
             expect(kennitala.getAge('0102713129', new Date(2017, 1, 1))).to.equal(46)
+            expect(kennitala.getAge('2203710000', new Date(2017, 11, 15))).to.equal(46)
         })
         it('should return age of company kennitala', function() {
             var refDate = new Date(2015, 3, 1)
