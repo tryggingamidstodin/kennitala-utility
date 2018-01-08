@@ -28,8 +28,8 @@ export function makeKennitala(birthdate: Date): string {
     let digits = [
         Math.floor(birthdate.getDate() / 10),
         birthdate.getDate() % 10,
-        Math.floor(birthdate.getMonth() / 10),
-        birthdate.getMonth() % 10,
+        Math.floor((birthdate.getMonth() + 1) / 10),
+        (birthdate.getMonth() + 1) % 10,
         Math.floor((birthdate.getFullYear() % 100) / 10),
         birthdate.getFullYear() % 10,
         2,

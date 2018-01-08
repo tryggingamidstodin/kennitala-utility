@@ -62,14 +62,20 @@ describe('kennitala', function() {
             expect(kennitala.getAge('3112832359', refDate)).to.equal(188 / 365.2422)
         })
     })
-    it('should make new valid kennitala', () => {
-        const kt = kennitala.makeKennitala(new Date(1984, 4, 15))
-        expect(kennitala.isValid(kt)).to.eq(true)
-        expect(kt).to.eq('1504842009')
-
-        const kt2 = kennitala.makeKennitala(new Date(1983, 5, 6))
-        expect(kennitala.isValid(kt2)).to.eq(true)
-        expect(kt2).to.eq('0605832189')
+    describe('dates', function() {
+        // Month is zero based
+        [
+            { date: new Date(1984, 3, 15), kt: '1504842009'},
+            { date: new Date(1983, 4, 6), kt: '0605832189'},
+            { date: new Date(1936, 0, 8), kt: '0801362189'},
+            { date: new Date(1972, 11, 31), kt: '3112722099'},
+        ].forEach( data => {
+            it('should make new valid kennitala', () => {
+                let kt = kennitala.makeKennitala(data.date)
+                expect(kennitala.isValid(kt)).to.eq(true)
+                expect(kt).to.eq(data.kt)
+            })
+        })
     })
     it('should verify if kennitala has a valid birthdate', () => {
         expect(kennitala.isValidDate('3106162189')).to.eq(false);
