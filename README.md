@@ -12,4 +12,5 @@ export declare function isValidDate(kt: string | number): boolean;
 export declare function getBirthdate(kt: string | number): Date;
 export declare function getAge(kt: string | number, referenceDate?: Date): number;
 export declare function isKennitalaPart(str?: string): boolean;
+export declare function isCompany(kt?: string): boolean;
 ```

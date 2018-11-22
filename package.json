@@ -5,27 +5,45 @@
   "main": "js/src/index.js",
   "types": "js/src/index.d.ts",
   "scripts": {
-    "test": "mocha js/test/index.js",
-    "dev": "tsc -w & mocha -w js/test/index.js && fg",
+    "test": "mocha --recursive js/*.spec.js",
+    "lint": "tslint src/*",
     "clean": "rm -rf js",
-    "prepublish": "npm run clean && tsc",
-    "format": "tsfmt -r"
+    "compile": "tsc",
+    "build": "npm run lint && npm run clean && npm run compile",
+    "ci": "npm run build && npm run test",
+    "tdd": "mocha --exit -R min --require ts-node/register --recursive --watch-extensions ts --watch  src/*.spec.ts",
+    "format": "prettier --write 'src/*.ts'",
+    "format-verify": "prettier -l 'src/*.ts'"
   },
   "keywords": [
     "kennitala",
-    "kennitolur"
+    "kennitolur",
+    "kennitölur",
+    "identitynumber"
   ],
   "author": "Tryggingamidstodin <bt.hugbunadargerd@tm.is> (https://github.com/tryggingamidstodin/)",
   "files": [
     "js"
   ],
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run format-verify",
+      "pre-push": "npm run ci"
+    }
+  },
   "license": "MIT",
   "devDependencies": {
-    "@types/mocha": "^2.2.41",
-    "chai": "^3.5.0",
-    "mocha": "^3.4.1",
-    "typescript": "^2.3.2",
-    "typescript-formatter": "^5.2.0"
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.10",
+    "chai": "^4.2.0",
+    "ghooks": "^2.0.4",
+    "husky": "^1.2.0",
+    "mocha": "^5.2.0",
+    "prettier": "^1.15.2",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
   },
   "repository": {
     "type": "git",
