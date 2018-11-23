@@ -1,6 +1,6 @@
 {
   "name": "kennitala-utility",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "description": "Utility functions for icelandic social security numbers (kennitolur).",
   "main": "js/index.js",
   "types": "js/index.d.ts",
