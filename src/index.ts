@@ -89,11 +89,11 @@ export function isValid(kt: string | number): boolean {
   return isMod11(kt);
 }
 export function cleanAndValidate(kt?: string | number): string {
-  kt = clean(kt);
-  if (!isValid(kt)) {
-    throw new Error("Invalid kennitala");
+  const cleanKt = clean(kt);
+  if (!isValid(cleanKt)) {
+    throw new Error("Invalid kennitala: " + kt);
   }
-  return kt;
+  return cleanKt;
 }
 export function getCleanIfValid(kt?: string | number): string {
   kt = clean(kt);
