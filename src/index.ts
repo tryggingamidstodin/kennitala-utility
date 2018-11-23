@@ -80,7 +80,9 @@ export function isValid(kt: string | number): boolean {
     typeof kt !== "string" ||
     kt.length < 9 ||
     !kt.match(/^[\d\.]/) ||
-    kt === "0000000000"
+    kt === "0000000000" ||
+    Number(kt.substr(kt.length - 8, 2)) > 13 ||
+    Number(kt.substr(kt.length - 8, 2)) === 0
   ) {
     return false;
   }

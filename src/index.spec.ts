@@ -13,6 +13,7 @@ describe("kennitala", () => {
   });
   it("isLegalKt should check if a social security number is valid", () => {
     expect(kennitala.isValid("1504842359")).to.equal(true);
+    expect(kennitala.isValid(1504842359)).to.equal(true);
   });
   it("formatAndValidate", () => {
     expect(kennitala.cleanAndValidate("301794989")).to.equal("0301794989");
@@ -107,5 +108,9 @@ describe("kennitala", () => {
     expect(kennitala.isValidDate("1504842359")).to.eq(true);
     expect(kennitala.isValidDate("2902121239")).to.eq(true);
     expect(kennitala.isValidDate("2902131239")).to.eq(false);
+  });
+  it("kennitala with invalid month should not be valid", () => {
+    expect(kennitala.isValid("590881659")).to.eq(false);
+    expect(kennitala.isValid("0590881659")).to.eq(false);
   });
 });
