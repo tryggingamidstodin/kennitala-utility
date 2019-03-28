@@ -2,6 +2,13 @@
   "defaultSeverity": "error",
   "extends": ["tslint:recommended"],
   "jsRules": {},
-  "rules": {},
+  "rules": {
+    "object-literal-sort-keys": false,
+    "member-access": false,
+    "comment-format": [true, "check-space"],
+    "quotemark": [true, "single"],
+    "semicolon": [true, "never"],
+    "no-console": true
+  },
   "rulesDirectory": []
 }
