@@ -102,7 +102,7 @@ describe('kennitala', () => {
       })
     })
   })
-  it.only('should make valid kennitala from random date if no date is passed to make kennitala', () => {
+  it('should make valid kennitala from random date if no date is passed to make kennitala', () => {
     expect(kennitala.isValid(kennitala.makeKennitala())).to.eq(true)
   })
   it('should verify if kennitala has a valid birthdate', () => {
