@@ -24,14 +24,22 @@ export function format(kt: string): string {
   kt = clean(kt)
   return kt.substr(0, 6) + '-' + kt.substr(6, 10)
 }
-export function makeKennitala(birthdate: Date): string {
+function randomDate(start: Date, end: Date) {
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  )
+}
+export function makeKennitala(birthdate?: Date): string {
+  const dateOfBirth =
+    birthdate ||
+    randomDate(new Date(new Date().getFullYear() - 60, 1, 1), new Date())
   const digits = [
-    Math.floor(birthdate.getDate() / 10),
-    birthdate.getDate() % 10,
-    Math.floor((birthdate.getMonth() + 1) / 10),
-    (birthdate.getMonth() + 1) % 10,
-    Math.floor((birthdate.getFullYear() % 100) / 10),
-    birthdate.getFullYear() % 10,
+    Math.floor(dateOfBirth.getDate() / 10),
+    dateOfBirth.getDate() % 10,
+    Math.floor((dateOfBirth.getMonth() + 1) / 10),
+    (dateOfBirth.getMonth() + 1) % 10,
+    Math.floor((dateOfBirth.getFullYear() % 100) / 10),
+    dateOfBirth.getFullYear() % 10,
     2,
     0
   ]
@@ -58,7 +66,7 @@ export function makeKennitala(birthdate: Date): string {
   } else {
     digits.push(vartala)
   }
-  digits.push(Math.floor((birthdate.getFullYear() / 100) % 10))
+  digits.push(Math.floor((dateOfBirth.getFullYear() / 100) % 10))
   return digits.join('')
 }
 export function clean(kt?: string | number): string {

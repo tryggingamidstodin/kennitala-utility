@@ -88,18 +88,22 @@ describe('kennitala', () => {
   })
   describe('dates', () => {
     // Month is zero based
-    ;[
+    const testCases = [
       { date: new Date(1984, 3, 15), kt: '1504842009' },
       { date: new Date(1983, 4, 6), kt: '0605832189' },
       { date: new Date(1936, 0, 8), kt: '0801362189' },
       { date: new Date(1972, 11, 31), kt: '3112722099' }
-    ].forEach((data: { date: Date; kt: string }) => {
+    ]
+    testCases.forEach((data: { date: Date; kt: string }) => {
       it('should make new valid kennitala', () => {
         const kt = kennitala.makeKennitala(data.date)
         expect(kennitala.isValid(kt)).to.eq(true)
         expect(kt).to.eq(data.kt)
       })
     })
+  })
+  it.only('should make valid kennitala from random date if no date is passed to make kennitala', () => {
+    expect(kennitala.isValid(kennitala.makeKennitala())).to.eq(true)
   })
   it('should verify if kennitala has a valid birthdate', () => {
     expect(kennitala.isValidDate('3106162189')).to.eq(false)
