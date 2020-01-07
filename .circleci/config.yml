@@ -7,6 +7,7 @@ defaults: &defaults
 
 jobs:
   test:
+    <<: *defaults  
     docker:
       - image: debian:stretch
 
@@ -45,18 +46,18 @@ deploy:
         command: npm publish
             
 workflows:
-version: 2
-test-deploy:
-    jobs:
-    - test:
-        filters:
-            tags:
-            only: /^v.*/
-    - deploy:
-        requires:
-            - test
-        filters:
-            tags:
-            only: /^v.*/
-            branches:
-            ignore: /.*/
+    version: 2
+    test-deploy:
+        jobs:
+        - test:
+            filters:
+                tags:
+                only: /^v.*/
+        - deploy:
+            requires:
+                - test
+            filters:
+                tags:
+                only: /^v.*/
+                branches:
+                ignore: /.*/
