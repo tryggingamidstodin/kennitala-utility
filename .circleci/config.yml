@@ -7,10 +7,7 @@ defaults: &defaults
 
 jobs:
   test:
-    <<: *defaults  
-    docker:
-      - image: debian:stretch
-
+    <<: *defaults
     steps:
         - checkout
         - restore_cache:
