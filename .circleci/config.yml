@@ -17,11 +17,11 @@ jobs:
             - v1-dependencies-
 
         - run:
-          name: npm install
-          command: npm ci
+            name: npm install
+            command: npm ci
         - run:
-          name: build and test
-          command: npm run ci
+            name: build and test
+            command: npm run ci
 
         - save_cache:
             paths:
