@@ -1,3 +1,5 @@
+import { Oops } from 'oops-error'
+
 const isMod11 = (kt: string): boolean => {
   // Modulus-aðferð við að sannreyna kennitölu
   // https://www.skra.is/einstaklingar/eg-og-fjolskyldan/eg-i-thjodskra/um-kennitolur/
@@ -96,20 +98,6 @@ export function isValid(kt: string | number): boolean {
   }
   return isMod11(kt)
 }
-export function cleanAndValidate(kt?: string | number): string {
-  const cleanKt = clean(kt)
-  if (!isValid(cleanKt)) {
-    throw new Error('Invalid kennitala: ' + kt)
-  }
-  return cleanKt
-}
-export function getCleanIfValid(kt?: string | number): string {
-  kt = clean(kt)
-  if (!isValid(kt)) {
-    return ''
-  }
-  return kt
-}
 export function isValidDate(kt: string | number): boolean {
   const stringKt = clean(kt)
   let day = Number(stringKt.substring(0, 2))
@@ -145,12 +133,16 @@ export function getBirthdate(kt: string | number): Date {
     (Number(stringKt.substring(9, 10)) === 0 ? 2000 : 1900) +
     Number(stringKt.substring(4, 6))
   if (!isValidDate(stringKt)) {
-    throw new Error('Invalid date of birth. (kennitala: ' + kt + ')')
+    throw new Oops({
+      message: 'Invalid date of birth. (kennitala: ' + kt + ')',
+      category: 'OperationalError',
+      context: { kt }
+    })
   }
   return new Date(year, Number(month) - 1, day)
 }
 export function isCompany(kt: string): boolean {
-  const stringKt = cleanAndValidate(kt)
+  const stringKt = clean(kt)
   const day = Number(stringKt.substring(0, 2))
   return day > 31
 }

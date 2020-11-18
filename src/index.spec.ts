@@ -7,27 +7,11 @@ describe('kennitala', () => {
     expect(kennitala.isCompany("150484-2359drop table('secretTable')")).to.eq(
       false
     )
-    expect(() => kennitala.isCompany('1234567890')).to.throw(
-      'Invalid kennitala: 1234567890'
-    )
+    expect(kennitala.isCompany('1234567890')).to.equal(false)
   })
   it('isLegalKt should check if a social security number is valid', () => {
     expect(kennitala.isValid('1504842359')).to.equal(true)
     expect(kennitala.isValid(1504842359)).to.equal(true)
-  })
-  it('formatAndValidate', () => {
-    expect(kennitala.cleanAndValidate('301794989')).to.equal('0301794989')
-    expect(() => kennitala.cleanAndValidate('adfasdf')).to.throw(
-      'Invalid kennitala: adfasdf'
-    )
-    expect(() => kennitala.cleanAndValidate()).to.throw(
-      'Invalid kennitala: undefined'
-    )
-    expect(kennitala.cleanAndValidate('150484-2359')).to.equal('1504842359')
-    expect(kennitala.cleanAndValidate('30179-4989')).to.equal('0301794989')
-    expect(() => kennitala.cleanAndValidate('2203710000')).to.throw(
-      'Invalid kennitala: 2203710000'
-    )
   })
   it('should clean kennitala', () => {
     expect(

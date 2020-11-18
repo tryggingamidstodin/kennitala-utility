@@ -15,3 +15,7 @@ export declare function getAge(kt: string | number, referenceDate?: Date): numbe
 export declare function isKennitalaPart(str?: string): boolean;
 export declare function isCompany(kt?: string): boolean;
 ```
+
+## Changes
+
+[changelog.md](https://github.com/tryggingamidstodin/kennitala-utility/blob/master/CHANGELOG.md)
