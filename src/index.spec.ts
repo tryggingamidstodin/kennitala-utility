@@ -7,9 +7,7 @@ describe('kennitala', () => {
     expect(kennitala.isCompany("150484-2359drop table('secretTable')")).to.eq(
       false
     )
-    expect(() => kennitala.isCompany('1234567890')).to.throw(
-      'Invalid kennitala: 1234567890'
-    )
+    expect(kennitala.isCompany('1234567890')).to.equal(false)
   })
   it('isLegalKt should check if a social security number is valid', () => {
     expect(kennitala.isValid('1504842359')).to.equal(true)
