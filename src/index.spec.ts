@@ -13,20 +13,6 @@ describe('kennitala', () => {
     expect(kennitala.isValid('1504842359')).to.equal(true)
     expect(kennitala.isValid(1504842359)).to.equal(true)
   })
-  it('formatAndValidate', () => {
-    expect(kennitala.cleanAndValidate('301794989')).to.equal('0301794989')
-    expect(() => kennitala.cleanAndValidate('adfasdf')).to.throw(
-      'Invalid kennitala: adfasdf'
-    )
-    expect(() => kennitala.cleanAndValidate()).to.throw(
-      'Invalid kennitala: undefined'
-    )
-    expect(kennitala.cleanAndValidate('150484-2359')).to.equal('1504842359')
-    expect(kennitala.cleanAndValidate('30179-4989')).to.equal('0301794989')
-    expect(() => kennitala.cleanAndValidate('2203710000')).to.throw(
-      'Invalid kennitala: 2203710000'
-    )
-  })
   it('should clean kennitala', () => {
     expect(
       kennitala.clean("adklæj1015- 9$df123drop table('importantone')4")

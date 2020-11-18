@@ -98,26 +98,6 @@ export function isValid(kt: string | number): boolean {
   }
   return isMod11(kt)
 }
-export function cleanAndValidate(kt?: string | number): string {
-  const cleanKt = clean(kt)
-  if (!isValid(cleanKt)) {
-    throw new Oops({
-      message: 'Invalid kennitala: ' + kt,
-      category: 'OperationalError',
-      context: {
-        kt
-      }
-    })
-  }
-  return cleanKt
-}
-export function getCleanIfValid(kt?: string | number): string {
-  kt = clean(kt)
-  if (!isValid(kt)) {
-    return ''
-  }
-  return kt
-}
 export function isValidDate(kt: string | number): boolean {
   const stringKt = clean(kt)
   let day = Number(stringKt.substring(0, 2))
