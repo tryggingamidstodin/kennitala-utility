@@ -76,7 +76,7 @@ describe('kennitala', () => {
       { date: new Date(1984, 3, 15), kt: '1504842009' },
       { date: new Date(1983, 4, 6), kt: '0605832189' },
       { date: new Date(1936, 0, 8), kt: '0801362189' },
-      { date: new Date(1972, 11, 31), kt: '3112722099' }
+      { date: new Date(1972, 11, 31), kt: '3112722099' },
     ]
     testCases.forEach((data: { date: Date; kt: string }) => {
       it('should make new valid kennitala', () => {

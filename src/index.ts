@@ -43,7 +43,7 @@ export function makeKennitala(birthdate?: Date): string {
     Math.floor((dateOfBirth.getFullYear() % 100) / 10),
     dateOfBirth.getFullYear() % 10,
     2,
-    0
+    0,
   ]
   const vartalafunc = (d: number[]) => {
     return (
@@ -136,7 +136,7 @@ export function getBirthdate(kt: string | number): Date {
     throw new Oops({
       message: 'Invalid date of birth. (kennitala: ' + kt + ')',
       category: 'OperationalError',
-      context: { kt }
+      context: { kt },
     })
   }
   return new Date(year, Number(month) - 1, day)
@@ -173,9 +173,6 @@ export function isKennitalaPart(str?: string): boolean {
   if (!str) {
     return false
   }
-  const s = str
-    .replace(' ', '')
-    .replace('-', '')
-    .trim()
+  const s = str.replace(' ', '').replace('-', '').trim()
   return !isNaN(parseInt(s, 10))
 }
