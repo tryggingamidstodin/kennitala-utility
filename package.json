@@ -13,7 +13,7 @@
     "compile": "tsc",
     "build": "npm run clean && npm run compile",
     "test": "mocha js/*.spec.js",
-    "tdd": "mocha --exit -R min --require ts-node/register --recursive --watch-extensions ts --watch  src/*.spec.ts",
+    "tdd": "mocha --exit -R min --require ts-node/register --watch --inline-diffs src/*.ts",
     "prepublishOnly": "npm run ci"
   },
   "keywords": [

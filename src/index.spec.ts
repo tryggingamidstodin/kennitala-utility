@@ -9,9 +9,18 @@ describe('kennitala', () => {
     )
     expect(kennitala.isCompany('1234567890')).to.equal(false)
   })
-  it('isLegalKt should check if a social security number is valid', () => {
+  it('"kerfiskennitölur" should not be company', ()=>{
+    expect(kennitala.isCompany(kennitala.makeKerfiskennitala())).to.eq(false)
+  })
+  it('isValid should check if a social security number is valid', () => {
     expect(kennitala.isValid('1504842359')).to.equal(true)
     expect(kennitala.isValid(1504842359)).to.equal(true)
+    expect(kennitala.isValid(1514842359)).to.equal(false)
+  })
+  it('"kerfiskennitölur" should pass validation inspite of not following the isMod11 rules', () => {
+    expect(kennitala.isValid('892350-1739')).to.equal(true)
+    expect(kennitala.isValid('9123123999')).to.equal(true)
+    expect(kennitala.isValid(kennitala.makeKerfiskennitala())).to.eq(true)
   })
   it('should clean kennitala', () => {
     expect(

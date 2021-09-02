@@ -22,6 +22,10 @@ const isMod11 = (kt: string): boolean => {
   }
   return true
 }
+
+const isKerfiskennitala = (kt: string): boolean => {
+  return kt[0] === '8' || kt[0] === '9'
+}
 export function format(kt: string): string {
   kt = clean(kt)
   return kt.substr(0, 6) + '-' + kt.substr(6, 10)
@@ -30,6 +34,10 @@ function randomDate(start: Date, end: Date) {
   return new Date(
     start.getTime() + Math.random() * (end.getTime() - start.getTime())
   )
+}
+export function makeKerfiskennitala(): string {
+  const rand = Math.random()
+  return (Math.floor(rand) + 8) * 1000000000 + Math.floor(rand * 100000000) + ''
 }
 export function makeKennitala(birthdate?: Date): string {
   const dateOfBirth =
@@ -84,13 +92,15 @@ export function clean(kt?: string | number): string {
   }
   return kt
 }
-export function isValid(kt: string | number): boolean {
-  kt = clean(kt)
+export function isValid(kennitala: string | number): boolean {
+  const kt = clean(kennitala)
+  if (typeof kt !== 'string' || kt.length < 9 || !kt.match(/^[\d\.]/)) {
+    return false
+  }
+  if (isKerfiskennitala(kt)) {
+    return true
+  }
   if (
-    typeof kt !== 'string' ||
-    kt.length < 9 ||
-    !kt.match(/^[\d\.]/) ||
-    kt === '0000000000' ||
     Number(kt.substr(kt.length - 8, 2)) > 13 ||
     Number(kt.substr(kt.length - 8, 2)) === 0
   ) {
@@ -144,7 +154,7 @@ export function getBirthdate(kt: string | number): Date {
 export function isCompany(kt: string): boolean {
   const stringKt = clean(kt)
   const day = Number(stringKt.substring(0, 2))
-  return day > 31
+  return day < 80 && day > 31
 }
 export function getAge(kt: string | number, referenceDate?: Date): number {
   referenceDate = referenceDate || new Date()
