@@ -1,6 +1,5 @@
 import { expect } from 'chai'
 import * as kennitala from './'
-import exp from 'constants'
 
 describe('kennitala', () => {
   it('should be able to check if kennitala is of a company', () => {
