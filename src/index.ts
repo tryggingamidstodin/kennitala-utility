@@ -31,18 +31,14 @@ export function format(kt: string): string {
   return kt.substr(0, 6) + '-' + kt.substr(6, 10)
 }
 function randomDate(start: Date, end: Date) {
-  return new Date(
-    start.getTime() + Math.random() * (end.getTime() - start.getTime())
-  )
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
 }
 export function makeKerfiskennitala(): string {
   const rand = Math.random()
   return (Math.floor(rand) + 8) * 1000000000 + Math.floor(rand * 100000000) + ''
 }
 export function makeKennitala(birthdate?: Date): string {
-  const dateOfBirth =
-    birthdate ||
-    randomDate(new Date(new Date().getFullYear() - 60, 1, 1), new Date())
+  const dateOfBirth = birthdate || randomDate(new Date(new Date().getFullYear() - 60, 1, 1), new Date())
   const digits = [
     Math.floor(dateOfBirth.getDate() / 10),
     dateOfBirth.getDate() % 10,
@@ -54,18 +50,7 @@ export function makeKennitala(birthdate?: Date): string {
     0,
   ]
   const vartalafunc = (d: number[]) => {
-    return (
-      11 -
-      ((d[0] * 3 +
-        d[1] * 2 +
-        d[2] * 7 +
-        d[3] * 6 +
-        d[4] * 5 +
-        d[5] * 4 +
-        d[6] * 3 +
-        d[7] * 2) %
-        11)
-    )
+    return 11 - ((d[0] * 3 + d[1] * 2 + d[2] * 7 + d[3] * 6 + d[4] * 5 + d[5] * 4 + d[6] * 3 + d[7] * 2) % 11)
   }
   const vartala = vartalafunc(digits)
   if (vartala === 11) {
@@ -100,10 +85,7 @@ export function isValid(kennitala: string | number): boolean {
   if (isKerfiskennitala(kt)) {
     return true
   }
-  if (
-    Number(kt.substr(kt.length - 8, 2)) > 13 ||
-    Number(kt.substr(kt.length - 8, 2)) === 0
-  ) {
+  if (Number(kt.substr(kt.length - 8, 2)) > 13 || Number(kt.substr(kt.length - 8, 2)) === 0) {
     return false
   }
   return isMod11(kt)
@@ -117,15 +99,31 @@ export function isValidDate(kt: string | number): boolean {
   }
   const month = Number(stringKt.substring(2, 4))
   // Adding the century year
-  const year =
-    (Number(stringKt.substring(9, 10)) === 0 ? 2000 : 1900) +
-    Number(stringKt.substring(4, 6))
+  const year = (Number(stringKt.substring(9, 10)) === 0 ? 2000 : 1900) + Number(stringKt.substring(4, 6))
   const date = new Date(year, month - 1, day)
-  if (
-    Object.prototype.toString.call(date) === '[object Date]' &&
-    date.getMonth() === month - 1
-  ) {
-    return true
+
+  if (Object.prototype.toString.call(date) === '[object Date]') {
+    // exception for companies that were accidentially registered to illegal dates when the kennitala system was introduced.
+    if (year === 1969 || year === 1969) {
+      if (day > 31) {
+        return false
+      }
+      if (day > 28 && month === 2 && date.getMonth() === 2) {
+        return true
+      }
+      if (
+        day > 30 &&
+        ((month === 4 && date.getMonth() === 4) ||
+          (month === 6 && date.getMonth() === 6) ||
+          (month === 9 && date.getMonth() === 9) ||
+          (month === 11 && date.getMonth() === 11))
+      ) {
+        return true
+      }
+    }
+    if (date.getMonth() === month - 1) {
+      return true
+    }
   }
   return false
 }
@@ -139,9 +137,7 @@ export function getBirthdate(kt: string | number): Date {
   }
   const month = Number(stringKt.substring(2, 4))
   // Adding the century year
-  const year =
-    (Number(stringKt.substring(9, 10)) === 0 ? 2000 : 1900) +
-    Number(stringKt.substring(4, 6))
+  const year = (Number(stringKt.substring(9, 10)) === 0 ? 2000 : 1900) + Number(stringKt.substring(4, 6))
   if (!isValidDate(stringKt)) {
     throw new Oops({
       message: 'Invalid date of birth. (kennitala: ' + kt + ')',
@@ -170,14 +166,7 @@ export function getAge(kt: string | number, referenceDate?: Date): number {
     // þjóðskrá some times registers kennitölur with temporary last digits... add 100 to correct negative age outcome
     return age + 100
   }
-  return age < 1
-    ? (referenceDate.getTime() - ktDate.getTime()) /
-        1000 /
-        60 /
-        60 /
-        24 /
-        365.2422
-    : age
+  return age < 1 ? (referenceDate.getTime() - ktDate.getTime()) / 1000 / 60 / 60 / 24 / 365.2422 : age
 }
 export function isKennitalaPart(str?: string): boolean {
   if (!str) {
