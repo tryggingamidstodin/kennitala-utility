@@ -5,11 +5,11 @@ describe('kennitala', () => {
   it('should be able to check if kennitala is of a company', () => {
     expect(kennitala.isCompany('5811131290')).to.equal(true)
     expect(kennitala.isCompany("150484-2359drop table('secretTable')")).to.eq(
-      false
+      false,
     )
     expect(kennitala.isCompany('1234567890')).to.equal(false)
   })
-  it('"kerfiskennitölur" should not be company', ()=>{
+  it('"kerfiskennitölur" should not be company', () => {
     expect(kennitala.isCompany(kennitala.makeKerfiskennitala())).to.eq(false)
   })
   it('isValid should check if a social security number is valid', () => {
@@ -24,7 +24,7 @@ describe('kennitala', () => {
   })
   it('should clean kennitala', () => {
     expect(
-      kennitala.clean("adklæj1015- 9$df123drop table('importantone')4")
+      kennitala.clean("adklæj1015- 9$df123drop table('importantone')4"),
     ).to.equal('0101591234')
     expect(kennitala.clean(1234567890)).to.equal('1234567890')
   })
@@ -54,10 +54,10 @@ describe('kennitala', () => {
     it('should return the age for kennitala', () => {
       const refDate = new Date(2015, 2, 1)
       expect(
-        kennitala.getAge('2903992389', new Date(2017, 2, 28, 7, 22, 1))
+        kennitala.getAge('2903992389', new Date(2017, 2, 28, 7, 22, 1)),
       ).to.eq(17)
       expect(
-        kennitala.getAge('2903992389', new Date(2017, 2, 29, 7, 22, 1))
+        kennitala.getAge('2903992389', new Date(2017, 2, 29, 7, 22, 1)),
       ).to.eq(18)
       expect(kennitala.getAge('1504842359', new Date(2015, 3, 14))).to.equal(30)
       expect(kennitala.getAge('1504842359', new Date(2015, 3, 15))).to.equal(31)
@@ -65,7 +65,7 @@ describe('kennitala', () => {
       expect(kennitala.getAge('0709042840', refDate)).to.equal(10)
       expect(kennitala.getAge('0102713129', new Date(2017, 1, 1))).to.equal(46)
       expect(kennitala.getAge('2203710000', new Date(2017, 11, 15))).to.equal(
-        46
+        46,
       )
     })
     it('should return age of company kennitala', () => {
@@ -107,5 +107,38 @@ describe('kennitala', () => {
   it('kennitala with invalid month should not be valid', () => {
     expect(kennitala.isValid('590881659')).to.eq(false)
     expect(kennitala.isValid('0590881659')).to.eq(false)
+  })
+  // Fyrirtækjaskrá vas founded in the year 1969, and when the kennitala system was introduced instead of nemenumber.
+  // Some companies did not have a registration date in the database. So they were given kennitala from the foundation year of Fyrirtækjaskrá,
+  // but the mistake was made to assum all months had 31 days in that allocation, so some of the kennitölur are illegal.
+  it('should make an exception for illegal kennitölur from the year 1969', () => {
+    expect(kennitala.isValidDate('6902691111')).to.eq(true)
+    expect(kennitala.isValidDate('7002691111')).to.eq(true)
+    expect(kennitala.isValidDate('7102691111')).to.eq(true)
+    expect(kennitala.isValidDate('7202691111')).to.eq(false)
+    expect(kennitala.getBirthdate('6902691111').getTime()).to.eq(
+      new Date(1969, 2, 1).getTime(),
+    )
+    expect(kennitala.getAge('6902691111')).to.eq(54)
+    expect(kennitala.isValidDate('7104691111')).to.eq(true)
+    expect(kennitala.isValidDate('7204691111')).to.eq(false)
+    expect(kennitala.getBirthdate('7104691111').getTime()).to.eq(
+      new Date(1969, 4, 1).getTime(),
+    )
+    expect(kennitala.isValidDate('7106691111')).to.eq(true)
+    expect(kennitala.isValidDate('7206691111')).to.eq(false)
+    expect(kennitala.getBirthdate('7106691111').getTime()).to.eq(
+      new Date(1969, 6, 1).getTime(),
+    )
+    expect(kennitala.isValidDate('7109691111')).to.eq(true)
+    expect(kennitala.isValidDate('7209691111')).to.eq(false)
+    expect(kennitala.getBirthdate('7109691111').getTime()).to.eq(
+      new Date(1969, 9, 1).getTime(),
+    )
+    expect(kennitala.isValidDate('7111691111')).to.eq(true)
+    expect(kennitala.isValidDate('7211691111')).to.eq(false)
+    expect(kennitala.getBirthdate('7111691111').getTime()).to.eq(
+      new Date(1969, 11, 1).getTime(),
+    )
   })
 })

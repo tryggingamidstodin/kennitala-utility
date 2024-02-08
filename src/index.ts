@@ -32,7 +32,7 @@ export function format(kt: string): string {
 }
 function randomDate(start: Date, end: Date) {
   return new Date(
-    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    start.getTime() + Math.random() * (end.getTime() - start.getTime()),
   )
 }
 export function makeKerfiskennitala(): string {
@@ -121,11 +121,29 @@ export function isValidDate(kt: string | number): boolean {
     (Number(stringKt.substring(9, 10)) === 0 ? 2000 : 1900) +
     Number(stringKt.substring(4, 6))
   const date = new Date(year, month - 1, day)
-  if (
-    Object.prototype.toString.call(date) === '[object Date]' &&
-    date.getMonth() === month - 1
-  ) {
-    return true
+
+  if (Object.prototype.toString.call(date) === '[object Date]') {
+    // exception for companies that were accidentially registered to illegal dates when the kennitala system was introduced.
+    if (year === 1969 || year === 1969) {
+      if (day > 31) {
+        return false
+      }
+      if (day > 28 && month === 2 && date.getMonth() === 2) {
+        return true
+      }
+      if (
+        day > 30 &&
+        ((month === 4 && date.getMonth() === 4) ||
+          (month === 6 && date.getMonth() === 6) ||
+          (month === 9 && date.getMonth() === 9) ||
+          (month === 11 && date.getMonth() === 11))
+      ) {
+        return true
+      }
+    }
+    if (date.getMonth() === month - 1) {
+      return true
+    }
   }
   return false
 }
