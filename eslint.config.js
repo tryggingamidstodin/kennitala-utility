@@ -1,28 +1,30 @@
-module.exports = {
-  env: {
-    browser: true,
-    commonjs: true,
-    es6: true,
-    node: true,
-    mocha: true,
-    jquery: true
+import js from '@eslint/js'
+import tseslint from 'typescript-eslint'
+
+export default [
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    ignores: ['js/', 'node_modules/']
   },
-  extends: 'standard',
-  globals: {
-    angular: false,
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-    cy: true
-  },
-  parserOptions: {
-    ecmaVersion: 2018
-  },
-  rules: {
-    'space-before-function-paren': 0,
-    indent: 'off',
-    'no-var': 'warn',
-    'no-unused-expressions': 'warn',
-    'comma-dangle': 'off'
-  },
-  ignorePatterns: ['js/', 'node_modules/']
-}
+  {
+    files: ['**/*.ts', '**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        Buffer: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly'
+      }
+    },
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn'
+    }
+  }
+]
