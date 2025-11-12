@@ -1,6 +1,6 @@
 {
   "name": "kennitala-utility",
-  "version": "5.1.1",
+  "version": "6.0.0",
   "description": "Utility functions for icelandic social security numbers (kennitolur).",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
