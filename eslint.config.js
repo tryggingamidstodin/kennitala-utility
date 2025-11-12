@@ -5,7 +5,7 @@ export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    ignores: ['js/', 'node_modules/']
+    ignores: ['js/', 'dist/', 'node_modules/'],
   },
   {
     files: ['**/*.ts', '**/*.js'],
@@ -19,12 +19,12 @@ export default [
         __filename: 'readonly',
         Buffer: 'readonly',
         setTimeout: 'readonly',
-        clearTimeout: 'readonly'
-      }
+        clearTimeout: 'readonly',
+      },
     },
     rules: {
       '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn'
-    }
-  }
+      '@typescript-eslint/no-explicit-any': 'warn',
+    },
+  },
 ]

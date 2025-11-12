@@ -2,15 +2,31 @@
   "name": "kennitala-utility",
   "version": "5.1.1",
   "description": "Utility functions for icelandic social security numbers (kennitolur).",
-  "main": "js/index.js",
-  "types": "js/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
   "scripts": {
-    "ci": "npm run clean && npm run compile && npm run lint && npm run format && npm run test",
+    "ci": "npm run clean && npm run compile && npm run test",
     "lint": "eslint .",
     "lintfix": "eslint --fix .",
     "format": "prettier --write 'src/*.ts'",
-    "clean": "rm -rf js",
-    "compile": "tsc",
+    "clean": "rm -rf dist",
+    "compile": "npm run compile:cjs && npm run compile:esm && npm run copy-package-jsons",
+    "compile:cjs": "tsc -p tsconfig.cjs.json",
+    "compile:esm": "tsc -p tsconfig.esm.json",
+    "copy-package-jsons": "echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json && echo '{\"type\":\"module\"}' > dist/esm/package.json",
     "build": "npm run clean && npm run compile",
     "test": "node --test --import tsx src/*.spec.ts",
     "tdd": "node --test --import tsx --watch src/*.spec.ts",
@@ -24,7 +40,7 @@
   ],
   "author": "Tryggingamidstodin <bt.hugbunadargerd@tm.is> (https://github.com/tryggingamidstodin/)",
   "files": [
-    "js"
+    "dist"
   ],
   "license": "MIT",
   "devDependencies": {

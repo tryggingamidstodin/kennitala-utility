@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */,
-    "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
-    "declaration": true /* Generates corresponding '.d.ts' file. */,
-    "outDir": "js" /* Redirect output structure to the directory. */,
-    
-    "strict": true /* Enable all strict type-checking options. */,
-    "types": [
-      "node"
-    ],
-    "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "dist/cjs",
+    "strict": true,
+    "types": ["node"],
+    "esModuleInterop": true
   },
-  "exclude": ["node_modules", "js"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "src/**/*.spec.ts"]
 }
