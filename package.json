@@ -18,19 +18,19 @@
     }
   },
   "scripts": {
+    "build": "npm run clean && npm run compile",
     "ci": "npm run clean && npm run compile && npm run test",
-    "lint": "eslint .",
-    "lintfix": "eslint --fix .",
-    "format": "prettier --write 'src/*.ts'",
     "clean": "rm -rf dist",
-    "compile": "npm run compile:cjs && npm run compile:esm && npm run copy-package-jsons",
     "compile:cjs": "tsc -p tsconfig.cjs.json",
     "compile:esm": "tsc -p tsconfig.esm.json",
+    "compile": "npm run compile:cjs && npm run compile:esm && npm run copy-package-jsons",
     "copy-package-jsons": "echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json && echo '{\"type\":\"module\"}' > dist/esm/package.json",
-    "build": "npm run clean && npm run compile",
-    "test": "node --test --import tsx src/*.spec.ts",
+    "format": "prettier --write 'src/*.ts'",
+    "lint": "eslint .",
+    "lintfix": "eslint --fix .",
+    "prepublishOnly": "npm run ci",
     "tdd": "node --test --import tsx --watch src/*.spec.ts",
-    "prepublishOnly": "npm run ci"
+    "test": "node --test --import tsx src/*.spec.ts"
   },
   "keywords": [
     "kennitala",
