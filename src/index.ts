@@ -94,7 +94,7 @@ export function clean(kt?: string | number): string {
 }
 export function isValid(kennitala: string | number): boolean {
   const kt = clean(kennitala)
-  if (typeof kt !== 'string' || kt.length < 9 || !kt.match(/^[\d\.]/)) {
+  if (typeof kt !== 'string' || kt.length < 9 || !kt.match(/^[\d.]/)) {
     return false
   }
   if (isKerfiskennitala(kt)) {

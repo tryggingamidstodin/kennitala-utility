@@ -1,5 +1,5 @@
 Utility functions for icelandic social security numbers (kennitolur).
-Written in TypeScript. Compiled javascript is in js/ subfolder.
+Written in TypeScript. Supports both CommonJS and ES Modules.
 
 ###### types...
 
