@@ -29,7 +29,7 @@ const isKerfiskennitala = (kt: string): boolean => {
 }
 export function format(kt: string): string {
   kt = clean(kt)
-  return kt.substr(0, 6) + '-' + kt.substr(6, 10)
+  return kt.substring(0, 6) + '-' + kt.substring(6, 10)
 }
 function randomDate(start: Date, end: Date) {
   return new Date(
