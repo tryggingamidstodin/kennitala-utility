@@ -1,34 +1,35 @@
 import { Oops } from 'oops-error'
 
-const isMod11 = (kt: string): boolean => {
-  // Modulus-aðferð við að sannreyna kennitölu
-  // https://www.skra.is/einstaklingar/eg-og-fjolskyldan/eg-i-thjodskra/um-kennitolur/
-  const mod11 =
-    11 -
-    ((3 * Number(kt.charAt(0)) +
-      2 * Number(kt.charAt(1)) +
-      7 * Number(kt.charAt(2)) +
-      6 * Number(kt.charAt(3)) +
-      5 * Number(kt.charAt(4)) +
-      4 * Number(kt.charAt(5)) +
-      3 * Number(kt.charAt(6)) +
-      2 * Number(kt.charAt(7))) %
-      11)
-  if (mod11 === 11 && kt.charAt(8) === '0') {
-    return true
-  }
-  if (mod11 !== Number(kt.charAt(8))) {
-    return false
-  }
-  return true
-}
+// const isMod11 = (kt: string): boolean => {
+//   // Úrelt síðan 18.febrúar 2026 https://www.skra.is/um-okkur/frettir/frett/2025/05/14/Kennitolur-an-vartolu
+//   // Modulus-aðferð við að sannreyna kennitölu
+//   // https://www.skra.is/einstaklingar/eg-og-fjolskyldan/eg-i-thjodskra/um-kennitolur/
+//   const mod11 =
+//     11 -
+//     ((3 * Number(kt.charAt(0)) +
+//       2 * Number(kt.charAt(1)) +
+//       7 * Number(kt.charAt(2)) +
+//       6 * Number(kt.charAt(3)) +
+//       5 * Number(kt.charAt(4)) +
+//       4 * Number(kt.charAt(5)) +
+//       3 * Number(kt.charAt(6)) +
+//       2 * Number(kt.charAt(7))) %
+//       11)
+//   if (mod11 === 11 && kt.charAt(8) === '0') {
+//     return true
+//   }
+//   if (mod11 !== Number(kt.charAt(8))) {
+//     return false
+//   }
+//   return true
+// }
 
 const isKerfiskennitala = (kt: string): boolean => {
   return kt[0] === '8' || kt[0] === '9'
 }
 export function format(kt: string): string {
   kt = clean(kt)
-  return kt.substr(0, 6) + '-' + kt.substr(6, 10)
+  return kt.substring(0, 6) + '-' + kt.substring(6, 10)
 }
 function randomDate(start: Date, end: Date) {
   return new Date(
@@ -106,7 +107,7 @@ export function isValid(kennitala: string | number): boolean {
   ) {
     return false
   }
-  return isMod11(kt)
+  return true
 }
 export function isValidDate(kt: string | number): boolean {
   const stringKt = clean(kt)
@@ -185,16 +186,16 @@ export function getAge(kt: string | number, referenceDate?: Date): number {
     age--
   }
   if (age < 0) {
-    // þjóðskrá some times registers kennitölur with temporary last digits... add 100 to correct negative age outcome
+    // þjóðskrá sometimes registers kennitölur with temporary last digits... add 100 to correct negative age outcome
     return age + 100
   }
   return age < 1
     ? (referenceDate.getTime() - ktDate.getTime()) /
-        1000 /
-        60 /
-        60 /
-        24 /
-        365.2422
+    1000 /
+    60 /
+    60 /
+    24 /
+    365.2422
     : age
 }
 export function isKennitalaPart(str?: string): boolean {
