@@ -1,7 +1,7 @@
 {
   "name": "kennitala-utility",
   "version": "6.1.2",
-  "description": "Utility functions for icelandic social security numbers (kennitolur).",
+  "description": "Utility functions for icelandic social security numbers (kennitolur) that includes the change to validation 2026.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/cjs/index.d.ts",
